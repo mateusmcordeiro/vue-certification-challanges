@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 
 const products = ref([
-  { id: 1, name: "Mouse - Logitech MX Master 3S", price: 9220, quantity: 1 },
+  { id: 1, name: "Mouse - Logitech MX Master 3S", price: 9222, quantity: 1 },
   { id: 2, name: "Keyboard - Logitech MX Keys", price: 7990, quantity: 1 },
   {
     id: 3,
@@ -12,17 +12,14 @@ const products = ref([
   },
 ]);
 
-const total = computed(() => {
-  return Math.round(
-    products.value.reduce((acc, product) => acc + product.price, 0) / 100
-  );
-});
+const total = computed(() => (products.value.reduce((acc, product) => acc + product.price*product.quantity, 0) / 100).toFixed(2));
 
 function increaseQuantity(product) {
   product.quantity += 1;
 }
 
 function decreaseQuantity(product) {
+  if (product.quantity === 0 ) return;
   product.quantity -= 1;
 }
 </script>
@@ -42,7 +39,7 @@ function decreaseQuantity(product) {
         >
           <span class="flex items-center justify-between w-full space-x-3">
             <span class="w-1/3 truncate">{{ product.name }}</span>
-            <span>${{ product.price / 100 }}</span>
+            <span>${{ (product.price / 100).toFixed(2) }}</span>
             <span class="inline-flex items-center justify-between space-x-3">
               <button
                 class="bg-blue-400 hover:bg-blue-600 py-1 px-2 rounded-md"
@@ -59,7 +56,7 @@ function decreaseQuantity(product) {
               </button>
             </span>
             <span class="w-16 text-right">
-              ${{ (product.price * product.quantity) / 100 }}
+              ${{ ((product.price * product.quantity) / 100).toFixed(2) }}
             </span>
           </span>
         </li>
