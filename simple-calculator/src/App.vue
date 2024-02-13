@@ -1,6 +1,8 @@
 <script setup>
-// Start here your app logic
+import Calculator from './Calculator.vue'
 </script>
 <template>
-  <!--	Start here your template -->
+  <div class="w-screen h-screen flex items-center justify-center">
+    <Calculator/>
+  </div>
 </template>
