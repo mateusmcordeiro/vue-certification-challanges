@@ -3,32 +3,14 @@ import { Transition,watch,ref } from 'vue';
 const props = defineProps({
   label: String,
   number: Number,
-  nextNumber: Number
 });
-
-const oddNumber = ref(0);
-const evenNumber = ref(1);
-
-watch(() => props.number,(number)=> {
-  if (number%2 === 0) {
-    evenNumber.value = number;
-  } else {
-    oddNumber.value = number;
-  }
-},{immediate: true});
-
 </script>
 <template>
   <div class="segment">
     <div class="number-wrapper">
-
       <Transition>
-        <span v-if="number %2 === 0" class="number">{{ evenNumber }}</span>
+        <span :key="number" class="number">{{ number }}</span>
       </Transition>
-      <Transition>
-        <span  v-if="number % 2 !== 0" class="number">{{ oddNumber }}</span>
-      </Transition>
-
     </div>
     <span class="block pt-2 label">{{ label }}</span>
   </div>
@@ -64,6 +46,6 @@ watch(() => props.number,(number)=> {
 }
 .v-enter-from,
 .v-leave-to {
-  opacity: 0;
+  /* opacity: 0; */
 }
 </style>
